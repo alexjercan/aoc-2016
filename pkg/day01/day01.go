@@ -3,6 +3,8 @@ package day01
 import (
 	"strconv"
 	"strings"
+
+	"github.com/alexjercan/aoc-2016/pkg/util"
 )
 
 type Command struct {
@@ -85,14 +87,6 @@ func Move(position Position, facing string, visited map[Position]int, command Co
 	return position, facing, visited
 }
 
-func Abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-
-	return x
-}
-
 func Solve1(commands []Command) int {
 	position := Position{0, 0}
 	facing := "N"
@@ -102,7 +96,7 @@ func Solve1(commands []Command) int {
 		position, facing, visited = Move(position, facing, visited, command)
 	}
 
-	return Abs(position.x) + Abs(position.y)
+	return util.Abs(position.x) + util.Abs(position.y)
 }
 
 func Solve2(commands []Command) int {
@@ -115,12 +109,12 @@ func Solve2(commands []Command) int {
 
 		for key, value := range visited {
 			if value == 2 {
-				return Abs(key.x) + Abs(key.y)
+				return util.Abs(key.x) + util.Abs(key.y)
 			}
 		}
 	}
 
-	return Abs(position.x) + Abs(position.y)
+	return util.Abs(position.x) + util.Abs(position.y)
 }
 
 func Solve(input string) string {

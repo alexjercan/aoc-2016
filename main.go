@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/alexjercan/aoc-2016/pkg/day01"
+	"github.com/alexjercan/aoc-2016/pkg/day02"
 )
 
 func ReadInput(day int) string {
@@ -26,6 +27,8 @@ func GetSolver(day int) func(string) string {
 	switch day {
 	case 1:
 		return day01.Solve
+	case 2:
+		return day02.Solve
 	}
 
 	panic("Unknown day")
