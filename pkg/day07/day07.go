@@ -1,0 +1,5 @@
+package day07
+
+func Solve(input string) string {
+	return "Day07\nPart1: " + "0" + "\nPart2: " + "0"
+}
