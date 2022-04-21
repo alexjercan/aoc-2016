@@ -7,3 +7,15 @@ func Reverse[S ~[]E, E any](s S) S {
 
 	return s
 }
+
+func IntersectNotNull[S ~[]E, E comparable](xs S, ys S) bool {
+	for _, x := range xs {
+		for _, y := range ys {
+			if x == y {
+				return true
+			}
+		}
+	}
+
+	return false
+}
