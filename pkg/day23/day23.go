@@ -85,21 +85,6 @@ func step(i int, registers map[string]int, instructions [][]string) (int, map[st
 	return i, registers
 }
 
-func optimize(instructions [][]string) [][]string {
-	newInstructions := make([][]string, 0)
-	for i := 0; i < len(instructions)-4; {
-		if instructions[i+0][0] == "inc" && instructions[i+1][0] == "dec" && instructions[i+2][0] == "jnz" && instructions[i+2][1] == instructions[i+1][1] && instructions[i+2][2] == "-2" && instructions[i+3][0] == "dec" && instructions[i+4][0] == "jnz" && instructions[i+4][1] == instructions[i+3][1] && instructions[i+4][2] == "-5" {
-			newInstructions = append(newInstructions, []string{"mul", instructions[i+1][1], instructions[i+3][1], instructions[i+0][1]})
-			i += 5
-		} else {
-			newInstructions = append(newInstructions, instructions[i])
-			i++
-		}
-	}
-
-	return newInstructions
-}
-
 func solve1(lines []string) int {
 	instructions := make([][]string, len(lines))
 	for i, line := range lines {
