@@ -4,6 +4,8 @@ import (
 	"container/heap"
 	"strconv"
 	"strings"
+
+	"github.com/alexjercan/aoc-2016/pkg/util"
 )
 
 type Point struct {
@@ -180,6 +182,30 @@ func solve1(graph [][]int) int {
 	return minCost
 }
 
+func solve2(graph [][]int) int {
+	K := len(graph)
+	nodes := make([]int, K-1)
+	for i := range nodes {
+		nodes[i] = i + 1
+	}
+
+	minCost := 0
+	for _, path := range util.Permutations(nodes) {
+		path = append([]int{0}, path...)
+		path = append(path, 0)
+
+		cost := 0
+		for i := 0; i < len(path)-1; i++ {
+			cost += graph[path[i]][path[i+1]]
+		}
+		if minCost == 0 || minCost > cost {
+			minCost = cost
+		}
+	}
+
+	return minCost
+}
+
 func Solve(input string) string {
 	lines := strings.Split(strings.TrimSpace(input), "\n")
 	graphMap := createWeightedGraph(lines)
@@ -197,5 +223,5 @@ func Solve(input string) string {
 		}
 	}
 
-	return "Day24\nPart1: " + strconv.Itoa(solve1(graph)) + "\nPart2: " + "0"
+	return "Day24\nPart1: " + strconv.Itoa(solve1(graph)) + "\nPart2: " + strconv.Itoa(solve2(graph))
 }
